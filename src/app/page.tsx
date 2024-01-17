@@ -4,27 +4,43 @@ import { useUsdcQuotes } from "@/lib/hooks";
 export default function PriceFeed() {
   const prices = useUsdcQuotes({
     token_ids: [
-      ...ETH_TOKEN_IDS,
+      ...OTHER_TOKEN_IDS,
       ...COSMOS_TOKEN_IDS
     ]
   });
   return (
-    <div>
-      <h1>Price Feed</h1>
-      {prices.map((price, index) => (
+    <div className="h-full w-full flex flex-col px-4">
+      <div className="py-4">
+        <h1 className="text-lg">Cosmos Tokens</h1>
+        <div>
+          {prices.slice(COSMOS_TOKEN_IDS.length).map((price, index) => (
+            <div
+              key={index}
+              className="flex gap-2 text-white">
+              <div className="text-yellow-500">{COSMOS_TOKEN_IDS[index]}</div>
+              <div>{price}</div>
+            </div>
+          )
+          )}
+        </div>
+      </div>
+      <div>
+      <h1 className="text-lg">
+        Other Tokens
+      </h1>
+      {prices.slice(0, OTHER_TOKEN_IDS.length).map((price, index) => (
         <div
           key={index}
           className="flex gap-2 text-white">
-          <div>{ETH_TOKEN_IDS[index]}</div>
+          <div className="text-purple-500">{OTHER_TOKEN_IDS[index]}</div>
           <div>{price}</div>
+        </div>))}
         </div>
-      )
-      )}
     </div>
   );
 }
 
-const ETH_TOKEN_IDS = [
+const OTHER_TOKEN_IDS = [
   "usd-coin",
   "ethereum",
   "bitcoin",

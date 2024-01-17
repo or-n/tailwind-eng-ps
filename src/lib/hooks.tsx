@@ -11,12 +11,10 @@ export const useUsdcQuotes = ({
   useEffect(() => {
     const fetch_usd_prices = async () => {
       const response = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${
-          token_ids.join(",")
-        }&vs_currencies=usd`
+        `/api/price?ids=${token_ids.join(",")}`
       );
       const data = await response.json();
-      set_prices(data);
+      set_prices(data.prices);
     };
 
     fetch_usd_prices();
