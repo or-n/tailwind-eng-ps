@@ -6,9 +6,9 @@ import { StdSignDoc as AminoSignDoc } from "@cosmjs/amino"
 import {} from "@cosmjs/proto-signing"
 
 export type SignDocParser = {
-	get_fee(): Coin[]
-	get_gas(): number
-	get_chain_id(): string
+    get_fee(): Coin[]
+    get_gas(): number
+    get_chain_id(): string
 }
 
 class AminoSignDocParser implements SignDocParser {

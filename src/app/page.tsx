@@ -11,11 +11,11 @@ export default function PriceFeed() {
   return (
     <div className="h-full w-full flex flex-col px-4">
       <div className="py-4">
-        <h1 className="text-lg">Cosmos Tokens Blep</h1>
+        <h1 className="text-lg">Cosmos Tokens</h1>
         <div>
-          {prices.slice(COSMOS_TOKEN_IDS.length).map((price, index) => (
+          {prices.slice(OTHER_TOKEN_IDS.length).map((price, index) => (
             <div
-              key={index}
+              key={COSMOS_TOKEN_IDS[index]}
               className="flex gap-2 text-white">
               <div className="text-yellow-500">{COSMOS_TOKEN_IDS[index]}</div>
               <div>{price}</div>
@@ -30,7 +30,7 @@ export default function PriceFeed() {
       </h1>
       {prices.slice(0, OTHER_TOKEN_IDS.length).map((price, index) => (
         <div
-          key={index}
+          key={OTHER_TOKEN_IDS[index]}
           className="flex gap-2 text-white">
           <div className="text-purple-500">{OTHER_TOKEN_IDS[index]}</div>
           <div>{price}</div>
