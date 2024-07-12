@@ -11,7 +11,7 @@ export default function PriceFeed() {
   return (
     <div className="h-full w-full flex flex-col px-4">
       <div className="py-4">
-        <h1 className="text-lg">Cosmos Tokens</h1>
+        <h1 className="text-lg">Cosmos Tokens Blep</h1>
         <div>
           {prices.slice(COSMOS_TOKEN_IDS.length).map((price, index) => (
             <div
