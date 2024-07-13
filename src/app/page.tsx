@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useUsdcQuotes } from "@/lib/hooks"
 import { useState } from 'react'
 
@@ -100,7 +100,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
 function PriceFeed() {
@@ -109,7 +109,7 @@ function PriceFeed() {
       ...OTHER_TOKEN_IDS,
       ...COSMOS_TOKEN_IDS
     ]
-  });
+  })
   return (
     <div className="h-full flex flex-col px-4">
       <div className="py-4">
@@ -139,7 +139,7 @@ function PriceFeed() {
         </div>))}
         </div>
     </div>
-  );
+  )
 }
 
 const OTHER_TOKEN_IDS = [
@@ -180,4 +180,4 @@ const COSMOS_TOKEN_IDS = [
   "persistence",
   "osmosis",
   "sifchain",
-];
+]
