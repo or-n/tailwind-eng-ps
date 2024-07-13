@@ -1,11 +1,41 @@
 "use client";
-import { useUsdcQuotes } from "@/lib/hooks";
+import { useUsdcQuotes } from "@/lib/hooks"
+import { useState } from 'react'
 
 export default function Main() {
   return (
     <div>
       <Navbar/>
-      <PriceFeed/>
+      <div className="flex">
+        <PriceFeed/>
+        <Counter/>
+      </div>
+    </div>
+  )
+}
+
+function Counter() {
+  const [counter, setCounter] = useState<number>(0)
+
+  const handleIncrement = async () => {
+    const response = await fetch('/api/increment-random', {
+      method: 'POST',
+    })
+    if (response.ok) {
+      const data = await response.json()
+      setCounter(data.counter)
+    }
+  }
+
+  return (
+    <div className="p-4 space-y-4">
+      <h1>Counter: {counter}</h1>
+      <button
+        onClick={handleIncrement}
+        className="rounded-md bg-gray-800 hover:bg-gray-500 p-2"
+      >
+        Increment Random
+      </button>
     </div>
   )
 }
@@ -81,7 +111,7 @@ function PriceFeed() {
     ]
   });
   return (
-    <div className="h-full w-full flex flex-col px-4">
+    <div className="h-full flex flex-col px-4">
       <div className="py-4">
         <h1 className="text-lg">Cosmos Tokens</h1>
         <div>
