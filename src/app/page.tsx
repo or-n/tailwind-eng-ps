@@ -16,6 +16,8 @@ export default function Main() {
 
 function Counter() {
   const [counter, setCounter] = useState<number>(0)
+  const [history, setHistory] = useState<number[]>([])
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const handleIncrement = async () => {
     const response = await fetch('/api/increment-random', {
@@ -24,8 +26,21 @@ function Counter() {
     if (response.ok) {
       const data = await response.json()
       setCounter(data.counter)
+      setHistory(data.history)
     }
   }
+
+  const itemsPerPage = 10
+  const totalPages = Math.max(1, Math.ceil(history.length / itemsPerPage))
+  const lastPage = totalPages - 1
+
+  const displayHistory = history.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  )
+
+  const goToFirstPage = () => setCurrentPage(0)
+  const goToLastPage = () => setCurrentPage(totalPages - 1)
 
   return (
     <div className="p-4 space-y-4">
@@ -36,6 +51,37 @@ function Counter() {
       >
         Increment Random
       </button>
+      <div>
+        <h2>History:</h2>
+        <ul>
+          {displayHistory.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+        <div className="space-x-2">
+          <button
+            onClick={goToFirstPage}
+            disabled={currentPage === 0}
+          >
+            &laquo;
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`rounded-md p-2 ${currentPage === page ? 'bg-pink-500' : 'bg-gray-700'}`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            onClick={goToLastPage}
+            disabled={currentPage === lastPage}
+          >
+            &raquo;
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
